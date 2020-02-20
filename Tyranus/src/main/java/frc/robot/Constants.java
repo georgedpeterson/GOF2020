@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.wpilibj.trajectory.TrapezoidProfile;
-import edu.wpi.first.wpilibj.Encoder;
+import frc.robot.subsystems.AbsoluteEncoder;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -31,16 +31,18 @@ public final class Constants {
     public static final int kRearLeftTurningMotorPort = 6;
     public static final int kFrontRightTurningMotorPort = 4;
     public static final int kRearRightTurningMotorPort = 3;
-
     public static final int kFrontLeftDriveEncoderPort = 0;
-    public static final int kRearLeftDriveEncoderPort = 1;
-    public static final int kFrontRightDriveEncoderPort = 2;
+    public static final int kRearLeftDriveEncoderPort = 2;
+    public static final int kFrontRightDriveEncoderPort = 1;
     public static final int kRearRightDriveEncoderPort = 3;
 
     public static final boolean kFrontLeftDriveEncoderReversed = false;
     public static final boolean kRearLeftDriveEncoderReversed = true;
     public static final boolean kFrontRightDriveEncoderReversed = false;
     public static final boolean kRearRightDriveEncoderReversed = true;
+
+    public static final double SWERVE_STEER_D = .075;
+    public static final double SWERVE_STEER_CAP = 1;
 
     public static final double kTrackWidth = 0.5;
     //Distance between centers of right and left wheels on robot
@@ -65,14 +67,16 @@ public final class Constants {
     public static final double kaVoltSecondsSquaredPerMeter = 0.15;
 
     public static final double kMaxSpeedMetersPerSecond = 3;
-    public static Encoder kDriveEncoderFrontLeft;
-    public static Encoder kSteerEncoderFrontLeft;
-    public static Encoder kDriveEncoderRearLeft;
-    public static Encoder kSteerEncoderRearLeft;
-    public static Encoder kSteerEncoderFrontRight;
-    public static Encoder kDriveEncoderFrontRight;
-    public static Encoder kDriveEncoderRearRight;
-    public static Encoder kSteerEncoderRearRight;
+
+    private static double kDriveEncoderFrontLeftOffset = 0;
+    private static double kDriveEncoderRearLeftOffset = 0;
+    private static double kDriveEncoderFrontRightOffset = 0;
+    private static double kDriveEncoderRearRightOffset = 0;
+
+    public static AbsoluteEncoder kDriveEncoderFrontLeft = new AbsoluteEncoder(kFrontLeftDriveEncoderPort, kDriveEncoderFrontLeftOffset);
+    public static AbsoluteEncoder kDriveEncoderRearLeft = new AbsoluteEncoder(kRearLeftDriveEncoderPort, kDriveEncoderRearLeftOffset);
+    public static AbsoluteEncoder kDriveEncoderFrontRight = new AbsoluteEncoder(kFrontRightDriveEncoderPort, kDriveEncoderFrontRightOffset);
+    public static AbsoluteEncoder kDriveEncoderRearRight = new AbsoluteEncoder(kRearRightDriveEncoderPort, kDriveEncoderRearRightOffset);
   }
 
   public static final class ModuleConstants {
